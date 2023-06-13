@@ -1,0 +1,54 @@
+<!-- {{addRoomForm.pristine | json}}
+<br>
+{{addRoomForm.dirty | json}}
+<br>
+{{addRoomForm.valid | json}}
+<br>
+{{addRoomForm.invalid | json}}
+<br>
+{{addRoomForm.value | json}} -->
+
+<div class="alert alert-success" *ngIf="successMessage !== ''">{{successMessage}}</div>
+<form (ngSubmit)="addRoom(addRoomForm)" #addRoomForm="ngForm">
+    <!-- <div class="form-group mt-3 mb-3">
+        <input type="text" name="roomNumber" class="form-control" Placeholder="Room Number">
+    </div> -->
+    <div class="form-group mb-3 mt-3">
+        <input type="text" name="roomType" 
+        class="form-control" Placeholder="Room Type" [(ngModel)]="room.roomType" 
+        [ngModelOptions]="{updateOn:'blur'}" required>
+    </div>
+    <div class="alert alert-warning" *ngIf="roomAmeneties.errors?.['minlength']">
+        Amenities field should be at least 5 and at most 140 characters long.
+    </div>
+    <div class="form-group mb-3">
+        <input #roomAmeneties="ngModel" type="text" name="amenities" 
+        class="form-control" Placeholder="Amenities" [(ngModel)]="room.amenities" required minlength="5" maxlength="140">
+    </div>
+    <div class="form-group mb-3">
+        <input type="number" name="price" 
+        class="form-control" Placeholder="Price ($) per night" [(ngModel)]="room.price" required  required>
+    </div>
+    <div class="form-group mb-3">
+        <input type="text" name="photos" 
+        class="form-control" Placeholder="Photos (link)" [(ngModel)]="room.photos" required>
+    </div>
+    <div class="form-group mb-3">
+        <input type="datetime" name="checkinTime" 
+        class="form-control" Placeholder="Check-in Time (datetime)" [(ngModel)]="room.checkinTime" required>
+    </div>
+    <div class="form-group mb-3">
+        <input type="datetime" name="checkoutTime" 
+        class="form-control" Placeholder="Check-out Time (datetime)" [(ngModel)]="room.checkoutTime" required>
+    </div>
+    <div class="alert alert-warning" *ngIf="(roomRating.errors?.['min'] || roomRating.errors?.['max']) && addRoomForm.dirty">
+        Rating must be between 1 and 5.
+    </div>
+    <div class="form-group mb-3">
+        <input type="number" name="rating" min="1" max="5" #roomRating="ngModel"
+        class="form-control" Placeholder="Rating (1-5)" [(ngModel)]="room.rating" required>
+    </div>
+    <div>
+        <button [disabled]="addRoomForm.invalid" class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>

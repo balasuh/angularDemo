@@ -1,0 +1,59 @@
+<!-- <h1>Welcome to the {{hotelName}}</h1> -->
+<!-- 
+<hinv-header></hinv-header> -->
+<!-- <hinv-header></hinv-header>
+<hinv-header></hinv-header> -->
+
+
+<!-- <div [hidden]="hideRooms">
+    <h2>Number of Rooms:</h2>
+    <div [ngStyle]="{'color': rooms.availableRooms ? 'blue' : 'red'}">
+        {{ rooms.availableRooms ?? 'No Rooms' }}
+    </div>
+</div> -->
+
+<!-- document.getElementByID('numberOfRooms').innerText = numberOfRooms; -->
+
+<h3 style="color:rgb(230, 3, 230);">
+    {{getError$ | async}}
+</h3>
+
+<!-- <button onclick="functionName"></button> -->
+
+<!-- <button (click)="toggle()" class="btn btn-warning">Toggle</button>
+
+<button (click)="editRoom()" class="btn btn-secondary">Edit Room 2</button>
+
+<button (click)="deleteRoom()" class="btn btn-info">Delete Room 3</button> -->
+
+<!-- <h3>{{totalBytes}} loaded</h3> -->
+
+<!-- <br>
+<br> -->
+
+<!-- {{roomList | json}} -->
+
+<div *ngIf="selectedRoom">
+    {{ selectedRoom | json}}
+</div>
+
+<div>
+    <button (click)="addRoom()" class="btn btn-success">Add Room</button>
+</div>
+
+{{ priceFilter | json }}
+
+<div>
+   <input type="number" class="form-control" Placeholder="Price" [formControl]="priceFilter"> 
+</div>
+
+
+<!-- <div *ngIf="rooms && rooms.availableRooms && rooms.availableRooms > 0"> -->
+<div *ngIf="hideRooms">
+    <!-- <h3>No. Of Rooms: {{roomsCount$ | async}} </h3> -->
+    <div *ngIf="rooms$ | async as rooms">
+        <hinv-rooms-list [rooms]="rooms" [price]="priceFilter.value" [title]="title" (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
+    </div>
+</div>
+
+<router-outlet></router-outlet>
